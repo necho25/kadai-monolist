@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  get 'toppages/index'
+  get 'users/show'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'users/new'
+
+  get 'users/create'
+
   root to: 'toppage#index'
+  
+  get 'toppages/index'
+  resources :user, only: [:show, :new, :create]
+
 end
