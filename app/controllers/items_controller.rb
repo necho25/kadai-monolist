@@ -12,24 +12,10 @@ class ItemsController < ApplicationController
       })
       
       results.each do |result| #取得し検索結果を扱えるようにだけして保存はしない
-        item = Item.new(read(result))
+        item = Item.find_or_initialize_by(read(result)) #既に保存されている Item に関しては、 item.id の値も含めたいからです。この item.id はフォームから Unwant するときに使用??
         @item << item
       end
     end
   end
   
-  def read(result)
-    code = result ['itemCode']
-    name = result['itemName']
-    url = result['itemUrl']
-    image_url = result['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '')
-    # gsubは第一引数を見つけ出し第二引数に置換する。つまりex=128x128が削除されdefaultサイズになる
-    
-    {
-    code: code, #上記で取得した値をハッシュにしている renderのとこでやる値の渡し方と同じ
-    name: name,
-    url: url,
-    image_url: image_url,
-    }
-  end
 end

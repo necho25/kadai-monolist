@@ -8,4 +8,22 @@ class User < ApplicationRecord
             uniqueness: {case_sensitive: false}
   has_secure_password
   
+  has_many :ownerships
+  has_many :items, through: :ownerships #user.itemsでwantやhaveしているitemsを取得
+  has_many :wants
+  has_many :want_items, through: :wants, source: :item #user.want_itemsでuserがwantしているitemsのみ取得
+  
+  
+  def want(item)
+    self.wants.find_or_create_by(item_id: item.id)
+  end
+  
+  def unwant(item)
+    want = self.wants.find_by(item_id: item.id)
+    want.destroy if want
+  end
+  
+  def want?(item)
+    self.want_items.include?(item)
+  end
 end

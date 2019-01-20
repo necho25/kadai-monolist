@@ -59,11 +59,15 @@ footer {
   max-width: 100%;
 }
 .item .panel-body {
-  height: 70px;
+  height: 120px;
 }
 p.item-title {
   display: -webkit-box;
   -webkit-box-orient: vertical; /*ﾎﾞｯｸｽ内の子要素を上から下へ並べる。つまり画像を名前を上下に並べる*/
   -webkit-line-clamp: 2; /*2行のみ表示*/
   overflow: hidden; /*はみ出した分を隠す*/
+}
+.item .buttons form {
+  display: inline-block;
+  margin: 0 5px;
 }

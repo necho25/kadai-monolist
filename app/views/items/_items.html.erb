@@ -1,4 +1,4 @@
-<% if items %>
+<% if items.present? %> <!--present存在するという意味。なのであればtrue 対義語にblankがある-->
   <div class="row">
     <% items.each do |item| %>
       <div class="item">
@@ -9,6 +9,9 @@
             </div>
             <div class="panel-body">
               <p class="item-title"><% item.name %></p>
+              <div class="buttons text-center">
+                <%= render 'ownerships/want_button', item: item %>
+              </div>
             </div>
           </div>
         </div>
