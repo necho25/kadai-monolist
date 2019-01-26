@@ -3,8 +3,9 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @item = @user.items.uniq #uniqueじゃないの？want と haveで重複を許さなくなるが持ってても更に欲しい人もいるのでは？
+    @items = @user.items.uniq #uniqueじゃないの？want と haveで重複を許さなくなるが持ってても更に欲しい人もいるのでは？
     @count_want = @user.want_items.count
+    @count_have = @user.have_items.count
   end
 
   def new

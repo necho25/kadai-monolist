@@ -12,8 +12,9 @@ class User < ApplicationRecord
   has_many :items, through: :ownerships #user.itemsでwantやhaveしているitemsを取得
   has_many :wants
   has_many :want_items, through: :wants, source: :item #user.want_itemsでuserがwantしているitemsのみ取得
-  
-  
+  has_many :haves, class_name: "Have" #haveがhafeに変換されてしまうので強制的にｸﾗｽを指定
+  has_many :have_items, through: :haves, source: :item
+
   def want(item)
     self.wants.find_or_create_by(item_id: item.id)
   end
@@ -26,4 +27,19 @@ class User < ApplicationRecord
   def want?(item)
     self.want_items.include?(item)
   end
+  
+  
+  def have(item)
+    self.haves.find_or_create_by(item_id: item.id)
+  end
+  
+  def unhave(item)
+    have = self.haves.find_by(item_id: item.id)
+    have.destroy if have
+  end
+  
+  def have?(item)
+    self.have_items.include?(item)
+  end
+
 end

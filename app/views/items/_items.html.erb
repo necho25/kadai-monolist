@@ -9,13 +9,14 @@
             </div>
             <div class="panel-body">
               <% if item.persisted? %> <!--DBに保存されているか-->
-                <p class="item-title"><% link_to item.name, item %></p> <!--itemだけでurlと認識するの？image_urlと誤認しないか？-->
+                <p class="item-title"><%= link_to item.name, item %></p> <!--item.id itemのshowに飛ぶ-->
               <% else %>
-                <p class="item-title"><% item.name %></p>
+                <p class="item-title"><%= item.name %></p>
               <% end %>
               <div class="buttons text-center">
                 <% if logged_in? %>
                   <%= render 'ownerships/want_button', item: item %>
+                  <%= render 'ownerships/have_button', item: item %>
                 <% end %>
               </div>
             </div>

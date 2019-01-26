@@ -1,0 +1,13 @@
+<% if current_user.have?(item) %>
+  <%= form_tag(ownership_path(item.id), method: :delete) do %> <!--保存してるitem.idで削除-->
+    <%= hidden_field_tag :item_id, item.id %>
+    <%= hidden_field_tag :type, 'Have' %>
+    <%= submit_tag 'Unhave', class: 'btn btn-success' %>
+  <% end %>
+<% else %>
+  <%= form_tag(ownerships_path) do %>
+    <%= hidden_field_tag :item_code, item.code %> <!--その商品のみが持つitem.codeで処理-->
+    <%= hidden_field_tag :type, 'Have' %>
+    <%= submit_tag 'Have it', class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
