@@ -1,0 +1,28 @@
+<h1>Wantのランキング</h1>
+<% if @items.present? %>
+  <div class="row">
+    <% @items.each_with_index do |item, index| %> <!--indexにﾙｰﾌﾟ回数が代入される 0からｽﾀｰﾄ-->
+      <div class="item">
+        <div class="col-md-3 col-sm-4 col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading text-center">
+              <img src="<%= item.image_url %>" alt="">
+            </div>
+            <div class="panel-body">
+              <p class="item-title"><%= link_to item.name, item %></p>
+              <% if logged_in? %>
+                <div class="buttons text-center">
+                    <%= render 'ownerships/want_button', item: item %>
+                    <%= render 'ownerships/have_button', item: item %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <p class="text-center"><%= index+1 %>位: <%= @ranking_counts[item.id] %> Wants</p><!--indexは0ｽﾀｰﾄだから+1して順位として使う-->
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
