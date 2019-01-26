@@ -57,3 +57,7 @@ gem 'rakuten_web_service', '1.5.0'
 
 #環境変数を簡単に扱えるようになるgem
 gem 'dotenv-rails'
+
+group :production do
+  gem 'pg', '0.21.0'
+end
